@@ -23,14 +23,18 @@ import { siteConfig } from "../config";
           {siteConfig.aboutMe}
         </p>
 
-        <div class="pt-4">
-          <div class="flex flex-wrap gap-3">
+        <div class="pt-4 space-y-6">
+          <div class="flex flex-wrap gap-2">
             {
-              siteConfig.skills.map((skill) => (
-                <span class="px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-100 text-gray-800 rounded-full text-sm sm:text-base md:text-lg font-medium hover:bg-gray-200 transition-colors duration-200">
-                  {skill}
-                </span>
-              ))
+              siteConfig.badges.map((badge) => {
+                const logo = badge.logo
+                  ? `&logo=${badge.logo}&logoColor=white`
+                  : "";
+                const src = `https://img.shields.io/badge/${encodeURIComponent(badge.label)}-${badge.color}?style=for-the-badge${logo}`;
+                return (
+                  <img src={src} alt={`${badge.label} badge`} class="h-8" />
+                );
+              })
             }
           </div>
         </div>
